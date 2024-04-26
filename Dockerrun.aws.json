@@ -1,13 +1,13 @@
 {
   "AWSEBDockerrunVersion": "1",
   "Image": {
-    "Name": "zeugy/sound_classification_api",
+    "Name": "zeugy/sound_classification_api:1.0",
     "Update": "true"
   },
   "Ports": [
     {
-      "ContainerPort": 8000,
-      "HostPort": 8000
+      "ContainerPort": 8080,
+      "HostPort": 8080
     }
   ],
   "Logging": "/var/log/nginx"

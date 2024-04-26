@@ -1,19 +1,18 @@
 FROM python:3.11
 
 # Set a directory for the app
-WORKDIR /usr/src/fastapi_app
+WORKDIR /api
 
 # Copy all the files to the container
 COPY . .
 
-# Install dependencies
-RUN apt-get update
-# RUN apt-get install -y libsndfile1 ffmpeg
-RUN pip install --upgrade pip
-RUN pip install --no-cache-dir -r requirements.txt
+RUN pip install --no-cache-dir --upgrade -r requirements.txt
 
-# Tell the port number the container should expose
-EXPOSE 8000
+# Expose a non-privileged port
+EXPOSE 8080
 
-# Run the command
-CMD ["uvicorn", "api:app"]
+# Use an environment variable for the port
+ENV PORT=8080
+
+# Run the command with the configurable port
+CMD ["uvicorn", "api:app", "--host", "0.0.0.0", "--port", "${PORT}"]
