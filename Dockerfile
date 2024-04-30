@@ -1,18 +1,9 @@
-FROM python:3.11
+FROM python:3.10-slim
 
-# Set a directory for the app
-WORKDIR /api
-
-# Copy all the files to the container
+ENV PYTHONUNBUFFERED 1 
+EXPOSE 8000 
+WORKDIR /usr/src/api
 COPY . .
+RUN pip install -r requirements.txt 
 
-RUN pip install --no-cache-dir --upgrade -r requirements.txt
-
-# Expose a non-privileged port
-EXPOSE 8080
-
-# Use an environment variable for the port
-ENV PORT=8080
-
-# Run the command with the configurable port
-CMD ["uvicorn", "api:app", "--host", "0.0.0.0", "--port", "${PORT}"]
+CMD ["uvicorn", "--host", "0.0.0.0", "--port", "8000", "main:app"]

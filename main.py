@@ -11,6 +11,14 @@ from utils import FeatureExtractor
 app = FastAPI()
 
 
+@app.get("/")
+def root():
+    """
+    Endpoint
+    """
+    return {"Hello": "World"}
+
+
 def extract_features(filepath: str):
     """Extracts features from the audio file located at the given filepath.
 
